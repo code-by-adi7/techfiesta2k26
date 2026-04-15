@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechFiesta 2026 | Into The Multiverse</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=Marvel:ital,wght@0,400;0,700;1,400;1,700&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        #marvel-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--marvel-dark);
+            z-index: 99999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .loader-logo {
+            animation: pulseGlow 1.5s infinite;
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                filter: drop-shadow(0 0 10px rgba(226, 54, 54, 0.5));
+                transform: scale(1);
+            }
+
+            50% {
+                filter: drop-shadow(0 0 30px rgba(226, 54, 54, 1));
+                transform: scale(1.1);
+            }
+
+            100% {
+                filter: drop-shadow(0 0 10px rgba(226, 54, 54, 0.5));
+                transform: scale(1);
+            }
+        }
+
+        .loader-text {
+            font-family: 'Orbitron', sans-serif;
+            color: #E23636;
+            margin-top: 20px;
+            letter-spacing: 5px;
+            font-weight: bold;
+            animation: textGlitch 1s infinite alternate;
+        }
+
+        @keyframes textGlitch {
+            0% {
+                opacity: 0.8;
+                transform: skewX(-5deg);
+            }
+
+            50% {
+                opacity: 1;
+                transform: skewX(5deg);
+            }
+
+            100% {
+                opacity: 0.8;
+                transform: skewX(-5deg);
+            }
+        }
+
+        :root {
+            --marvel-red: #E23636;
+            --marvel-dark: #111111;
+            --portal-orange: #ff7a00;
+            --jarvis-blue: #00f0ff;
+            --spider-red: #FF2A2A;
+            --spider-blue: #0A2463;
+            --wakanda-purple: #8A2BE2;
+            --vibranium: #A0AEC0;
+            --technova-gold: #FFD700;
+        }
+
+        body {
+            background-color: var(--marvel-dark);
+            color: #ffffff;
+            font-family: 'Rajdhani', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        .font-marvel {
+            font-family: 'Marvel', sans-serif;
+        }
+
+        .font-orbitron {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .font-bangers {
+            font-family: 'Bangers', cursive;
+        }
+
+        .font-anton {
+            font-family: 'Anton', sans-serif;
+        }
+
+        .marvel-title-box {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .marvel-tech {
+            background-color: var(--marvel-red);
+            color: white;
+            padding: 0 8px;
+            font-family: 'Anton', sans-serif;
+            letter-spacing: -1px;
+            box-shadow: 0 4px 6px -1px rgba(226, 54, 54, 0.4);
+        }
+
+        .marvel-fiesta {
+            background-color: white;
+            color: var(--marvel-dark);
+            padding: 0 8px;
+            font-family: 'Anton', sans-serif;
+            letter-spacing: -1px;
+            box-shadow: 0 4px 6px -1px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Background Effects */
+        .stars-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, #1b1b3a 0%, #050510 100%);
+            z-index: -2;
+        }
+
+        .starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(#ffffff 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.1;
+            z-index: -1;
+            animation: moveStars 100s linear infinite;
+        }
+
+        @keyframes moveStars {
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: -1000px 500px;
+            }
+        }
+
+        /* Hero Tesseract Effect - Marvel Cosmic Cube */
+        .tesseract-wrapper {
+            position: relative;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 800px;
+            margin-top: 30px;
+            margin-bottom: 40px;
+        }
+
+        .tesseract {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            transform-style: preserve-3d;
+            animation: rotateCube 15s infinite linear;
+            z-index: -1;
+            top: 50%;
+            left: 50%;
+            margin-top: -75px;
+            margin-left: -75px;
+        }
+
+        .cube-face {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border: 2px solid #00f0ff;
+            background: rgba(0, 240, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.5), inset 0 0 20px rgba(0, 240, 255, 0.5);
+        }
+
+        /* Outer Cube Faces */
+        .face-front {
+            transform: translateZ(75px);
+        }
+
+        .face-back {
+            transform: rotateY(180deg) translateZ(75px);
+        }
+
+        .face-right {
+            transform: rotateY(90deg) translateZ(75px);
+        }
+
+        .face-left {
+            transform: rotateY(-90deg) translateZ(75px);
+        }
+
+        .face-top {
+            transform: rotateX(90deg) translateZ(75px);
+        }
+
+        .face-bottom {
+            transform: rotateX(-90deg) translateZ(75px);
+        }
+
+        /* Inner Cube */
+        .inner-wrapper {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transform-style: preserve-3d;
+            animation: rotateCubeReverse 8s infinite linear;
+        }
+
+        .inner-face {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 2px solid #ffffff;
+            background: rgba(0, 240, 255, 0.3);
+            box-shadow: 0 0 15px #ffffff;
+        }
+
+        .inner-front {
+            transform: translateZ(40px);
+        }
+
+        .inner-back {
+            transform: rotateY(180deg) translateZ(40px);
+        }
+
+        .inner-right {
+            transform: rotateY(90deg) translateZ(40px);
+        }
+
+        .inner-left {
+            transform: rotateY(-90deg) translateZ(40px);
+        }
+
+        .inner-top {
+            transform: rotateX(90deg) translateZ(40px);
+        }
+
+        .inner-bottom {
+            transform: rotateX(-90deg) translateZ(40px);
+        }
+
+        @keyframes rotateCube {
+            0% {
+                transform: rotateX(0deg) rotateY(0deg);
+            }
+
+            100% {
+                transform: rotateX(360deg) rotateY(360deg);
+            }
+        }
+
+        @keyframes rotateCubeReverse {
+            0% {
+                transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotateX(-360deg) rotateY(-360deg) rotateZ(360deg);
+            }
+        }
+
+        /* --- CHARACTER ANIMATIONS --- */
+        @keyframes marvelFloat {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(2deg);
+            }
+
+            100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+        }
+
+        @keyframes subtleGlow {
+            0% {
+                filter: drop-shadow(0 0 5px rgba(226, 54, 54, 0.4));
+            }
+
+            50% {
+                filter: drop-shadow(0 0 15px rgba(226, 54, 54, 0.8));
+            }
+
+            100% {
+                filter: drop-shadow(0 0 5px rgba(226, 54, 54, 0.4));
+            }
+        }
+
+        .marvel-character {
+            pointer-events: none;
+            z-index: 1;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+            animation: marvelFloat 6s ease-in-out infinite, subtleGlow 4s linear infinite;
+        }
+
+        #hero-strange {
+            width: 45%;
+            max-width: 400px;
+            bottom: 5%;
+            right: 5%;
+        }
+
+        #hero-ironman {
+            width: 35%;
+            max-width: 300px;
+            top: 25%;
+            left: 5%;
+            animation-duration: 8s;
+        }
+
+        .spider-overlay {
+            width: 50%;
+            max-width: 600px;
+            opacity: 0.1;
+            transition: opacity 0.3s;
+        }
+
+        .theme-spider:hover .spider-overlay {
+            opacity: 0.3;
+        }
+
+        .wakanda-overlay {
+            width: 150px;
+            height: auto;
+            top: -20px;
+            left: -20px;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+
+        .theme-wakanda:hover .wakanda-overlay {
+            opacity: 0.3;
+        }
+
+        /* Section Titles */
+        .phase-title {
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .phase-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 4px;
+            width: 100%;
+            background: linear-gradient(90deg, transparent, var(--marvel-red), transparent);
+        }
+
+        /* Card Themes */
+        .event-card {
+            background: rgba(17, 17, 17, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-mystic {
+            border-top: 4px solid var(--portal-orange);
+        }
+
+        .theme-mystic:hover {
+            box-shadow: 0 0 30px rgba(255, 122, 0, 0.3);
+            border-color: var(--portal-orange);
+            transform: translateY(-5px);
+        }
+
+        .mystic-spark {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(255, 122, 0, 0.2) 0%, transparent 70%);
+            top: -50px;
+            right: -50px;
+            border-radius: 50%;
+        }
+
+        .theme-jarvis {
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            background: linear-gradient(135deg, rgba(0, 20, 40, 0.9) 0%, rgba(0, 0, 0, 0.9) 100%);
+        }
+
+        .theme-jarvis:hover {
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.4), inset 0 0 20px rgba(0, 240, 255, 0.1);
+            border-color: var(--jarvis-blue);
+        }
+
+        .jarvis-grid {
+            background-image: linear-gradient(rgba(0, 240, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 240, 255, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .theme-spider {
+            background: rgba(10, 36, 99, 0.9);
+            border: 3px solid var(--marvel-dark);
+        }
+
+        .theme-spider::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: radial-gradient(var(--spider-red) 15%, transparent 16%);
+            background-size: 8px 8px;
+            opacity: 0.15;
+            z-index: 0;
+        }
+
+        .theme-spider:hover {
+            transform: scale(1.02) rotate(-1deg);
+            box-shadow: -8px 8px 0px var(--spider-red);
+            border-color: #fff;
+        }
+
+        .theme-battle {
+            background: linear-gradient(45deg, #1a0000 0%, #300000 100%);
+            border-bottom: 4px solid var(--marvel-red);
+        }
+
+        .theme-battle:hover {
+            box-shadow: 0 10px 40px rgba(226, 54, 54, 0.4);
+            filter: contrast(1.1);
+        }
+
+        .theme-wakanda {
+            background: linear-gradient(180deg, #1a1a2e 0%, #0d0d1a 100%);
+            border: 1px solid var(--wakanda-purple);
+        }
+
+        .theme-wakanda:hover {
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.4), inset 0 0 15px rgba(160, 174, 192, 0.2);
+            border-image: linear-gradient(45deg, var(--wakanda-purple), var(--vibranium)) 1;
+        }
+
+        .wakanda-pattern {
+            background-image: repeating-linear-gradient(45deg, rgba(138, 43, 226, 0.05) 0px, transparent 2px, transparent 10px, rgba(160, 174, 192, 0.05) 12px);
+        }
+
+        .theme-technova {
+            background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+            border-left: 4px solid var(--technova-gold);
+        }
+
+        .theme-technova:hover {
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+            border-color: #fff;
+        }
+
+        .btn-glitch {
+            position: relative;
+            background: var(--marvel-red);
+            color: white;
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            transition: all 0.2s;
+            clip-path: polygon(10% 0, 100% 0%, 90% 100%, 0% 100%);
+        }
+
+        .btn-glitch:hover {
+            background: white;
+            color: var(--marvel-red);
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(226, 54, 54, 0.8);
+        }
+
+        .btn-gold {
+            position: relative;
+            background: var(--technova-gold);
+            color: black;
+            text-transform: uppercase;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            transition: all 0.2s;
+            clip-path: polygon(10% 0, 100% 0%, 90% 100%, 0% 100%);
+        }
+
+        .btn-gold:hover {
+            background: white;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+        }
+
+        /* Form Inputs */
+        .input-marvel {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            transition: all 0.3s;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .input-marvel:focus {
+            border-color: var(--marvel-red);
+            box-shadow: 0 0 15px rgba(226, 54, 54, 0.4);
+            outline: none;
+        }
+
+        .input-marvel option {
+            background: #111;
+            color: white;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--marvel-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--marvel-red);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff4d4d;
+        }
+
+        .custom-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #E23636;
+            border-radius: 4px;
+        }
+
+        /* Checkbox styling */
+        input[type="checkbox"] {
+            accent-color: var(--marvel-red);
+            transform: scale(1.2);
+        }
+
+        #mobile-menu {
+            transition: all 0.3s ease-in-out;
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #mobile-menu.open {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .rules-box {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .marvel-sticker {
+            filter: drop-shadow(3px 0px 0px white) drop-shadow(0px 3px 0px white) drop-shadow(-3px 0px 0px white) drop-shadow(0px -3px 0px white) drop-shadow(5px 10px 15px rgba(0, 0, 0, 0.3));
+            opacity: 1;
+            transition: transform 0.2s;
+        }
+
+        .marvel-sticker:hover {
+            transform: scale(1.1) rotate(180deg) !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="marvel-loader">
+        <div class="marvel-title-box text-5xl loader-logo flex items-center">
+            <span class="marvel-tech">TECH</span>
+            <span class="marvel-fiesta">FIESTA</span>
+        </div>
+        <p class="loader-text text-sm md:text-base text-center" id="loader-msg">ASSEMBLING MULTIVERSE...</p>
+    </div>
+
+    <div class="stars-bg"></div>
+    <div class="starfield"></div>
+
+    <nav class="fixed w-full z-50 py-4 px-6 md:px-12 backdrop-blur-md bg-black/80 border-b border-white/10">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="marvel-title-box text-3xl">
+                <span class="marvel-tech">TECH</span>
+                <span class="marvel-fiesta">FIESTA</span>
+            </div>
+
+            <div class="hidden md:flex items-center space-x-8 font-orbitron text-sm font-bold tracking-wider">
+                <a href="#hero" class="hover:text-red-500 transition-colors uppercase">HQ</a>
+                <a href="#celestra" class="hover:text-red-500 transition-colors uppercase">Tech Fiesta</a>
+                <a href="#technova" class="hover:text-yellow-400 transition-colors uppercase">Fusion Fiesta</a>
+                <button onclick="toggleModal(true)"
+                    class="btn-glitch px-8 py-2 text-sm tracking-widest relative -top-1">Register</button>
+            </div>
+
+            <button id="menu-btn" class="md:hidden text-white hover:text-red-500">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
+                    </path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div id="mobile-menu"
+        class="fixed inset-0 z-40 bg-black/95 flex flex-col items-center justify-center space-y-8 font-orbitron text-2xl font-bold uppercase">
+        <a href="#hero" class="mobile-link text-gray-300 hover:text-red-500">HQ</a>
+        <a href="#celestra" class="mobile-link text-gray-300 hover:text-red-500">Tech Fiesta</a>
+        <a href="#technova" class="mobile-link text-gray-300 hover:text-yellow-400">Fuision Fiesta</a>
+        <button onclick="toggleModal(true)" class="btn-glitch px-10 py-4 text-xl tracking-widest mt-4">Register</button>
+    </div>
+
+    <section id="hero" class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden px-4">
+        <div class="relative z-10 text-center max-w-5xl mx-auto" data-aos="zoom-in" data-aos-duration="1200">
+            <p class="font-orbitron text-red-500 font-bold tracking-[0.3em] mb-4 uppercase text-xs md:text-base">Shree
+                Devi College of Information Science, Ballalbagh</p>
+
+            <div class="tesseract-wrapper mb-8 mt-4">
+                <div class="tesseract">
+                    <div class="cube-face face-front"></div>
+                    <div class="cube-face face-back"></div>
+                    <div class="cube-face face-right"></div>
+                    <div class="cube-face face-left"></div>
+                    <div class="cube-face face-top"></div>
+                    <div class="cube-face face-bottom"></div>
+                    <div class="inner-wrapper">
+                        <div class="inner-face inner-front"></div>
+                        <div class="inner-face inner-back"></div>
+                        <div class="inner-face inner-right"></div>
+                        <div class="inner-face inner-left"></div>
+                        <div class="inner-face inner-top"></div>
+                        <div class="inner-face inner-bottom"></div>
+                    </div>
+                </div>
+                <h1
+                    class="font-anton text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] uppercase tracking-tighter leading-none text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.3)] relative z-10">
+                    Into The <br>
+                    <span
+                        class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-white filter drop-shadow-[0_0_15px_rgba(0,240,255,0.8)]">Multiverse</span>
+                </h1>
+            </div>
+
+            <p class="font-rajdhani text-lg md:text-3xl font-light text-gray-300 max-w-3xl mx-auto mb-10 px-2">
+                Unlock portals, alter reality, and prove your powers in the ultimate <br class="hidden md:block">
+                interclass IT showdown of 2026.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <button onclick="toggleModal(true)"
+                    class="btn-glitch px-10 py-4 text-lg tracking-widest w-full sm:w-auto z-20">Initiate Link</button>
+                <a href="#celestra"
+                    class="font-orbitron font-bold text-lg px-10 py-4 bg-transparent border-2 border-white hover:bg-white hover:text-black transition-all uppercase tracking-widest w-full sm:w-auto z-20">Explore
+                    Realms</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="celestra" class="pt-24 pb-12 relative z-10 bg-black/50 overflow-hidden">
+        <img class="absolute spider-overlay opacity-10 pointer-events-none"
+            src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExY2R1bGoxdWxuY2dka3pwYXltNTd1djFrc3BrbWNyMWo3Z2R5M2QwcSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/V5gQbaYZ5Lnvv1sSIr/giphy.gif"
+            alt="Cap Shield Back" style="width:50%; max-width:600px; left:-10%; top:10%;">
+        <img class="absolute opacity-10 pointer-events-none"
+            src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3Y2duNzI0dnB5ZHllaHRwcjEzbW4wbjVob2ppZW5zOGx2bmQxMG8xdyZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/l0Iy6igPHkJkmOSLS/giphy.gif"
+            alt="Thor Back" style="width:30%; max-width:400px; right:0; top:40%;">
+
+        <div class="max-w-7xl mx-auto px-4 md:px-8 relative z-20">
+            <div class="text-center mb-10" data-aos="fade-down">
+                <h2 class="font-anton text-5xl md:text-7xl uppercase tracking-wider phase-title">Phase 1: <span
+                        class="text-red-500">TECH FIESTA </span></h2>
+            </div>
+
+            <div class="rules-box border-l-4 border-red-500" data-aos="fade-up">
+                <h3 class="font-orbitron font-bold text-xl text-red-400 mb-3 uppercase tracking-widest">Global
+                    Directives: TECH FIESTA ‼️</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-sm text-gray-300 font-rajdhani">
+                    <p>1. Each team will be alloted 10+5 minutes. Delay may lead to disqualification.</p>
+                    <p>2. Team must be punctual on time and dressed appropriately.</p>
+                    <p>3. Team members must maintain discipline and adhere to all rules.</p>
+                    <p>4. Use of abusive language/behavior will not be entertained.</p>
+                    <p>5. Follow all instructions given by the coordinators/judges. Their decisions are final.</p>
+                </div>
+            </div>
+
+            <div class="space-y-12">
+                <div class="event-card theme-mystic rounded-xl p-1 md:p-2" data-aos="fade-up">
+                    <div class="mystic-spark"></div>
+                    <div
+                        class="bg-black/80 rounded-lg p-6 md:p-10 flex flex-col lg:flex-row gap-8 items-start relative z-10">
+                        <div class="lg:w-1/3">
+                            <span
+                                class="inline-block px-3 py-1 bg-orange-500/20 text-orange-400 font-orbitron text-xs font-bold rounded mb-4 ring-1 ring-orange-500/50">Surprise
+                                Event</span>
+                            <h3
+                                class="font-marvel font-bold text-4xl md:text-5xl text-white mb-2 leading-none uppercase">
+                                The Hidden Multiverse</h3>
+                            <p class="text-gray-400 text-lg mb-6 font-rajdhani font-semibold">Step through the sling
+                                ring. Anything can happen.</p>
+                            <div class="mt-auto">
+                                <h4 class="font-orbitron text-orange-400 font-bold mb-2">Sorcerer Supremes</h4>
+                                <p class="text-sm">Faculty: <span class="text-white">Mrs Shashirekha, Mrs Jeevanya, Ms
+                                        Saakshi</span></p>
+                                <p class="text-sm">Student: <span class="text-white">Likith, Vidith, Abusinan</span></p>
+                            </div>
+                        </div>
+                        <div class="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-white/5 p-4 rounded-lg border border-white/10">
+                                <h4
+                                    class="font-orbitron font-bold text-orange-300 mb-2 uppercase text-sm border-b border-white/10 pb-2">
+                                    Sacred Timeline</h4>
+                                <ul class="list-disc list-inside text-sm text-gray-300 space-y-1">
+                                    <li>Starts at 10:00 AM sharp</li>
+                                    <li>Registration deadline: 13/04/2026</li>
+                                    <li>Venue: Room 102</li>
+                                </ul>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg border border-white/10">
+                                <h4
+                                    class="font-orbitron font-bold text-orange-300 mb-2 uppercase text-sm border-b border-white/10 pb-2">
+                                    The Sanctum Rules</h4>
+                                <ul class="list-disc list-inside text-sm text-gray-300 space-y-1">
+                                    <li>Max 2 teams per class (2 members each)</li>
+                                    <li>No mobile phones/digital magic</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card theme-jarvis rounded-xl p-1 md:p-2 jarvis-grid" data-aos="fade-left">
+                    <div
+                        class="bg-black/60 backdrop-blur-sm rounded-lg p-6 md:p-10 flex flex-col lg:flex-row gap-8 items-start relative z-10">
+                        <div class="lg:w-1/3">
+                            <span
+                                class="inline-block px-3 py-1 bg-cyan-500/20 text-cyan-400 font-orbitron text-xs font-bold rounded mb-4 ring-1 ring-cyan-500/50">Escape
+                                Room</span>
+                            <h3
+                                class="font-orbitron font-black text-3xl md:text-4xl text-white mb-2 uppercase drop-shadow-[0_0_10px_rgba(0,240,255,0.8)]">
+                                Jarvis Query Core</h3>
+                            <p class="text-gray-300 text-lg mb-6 font-rajdhani">Decrypt the system. Override the
+                                mainframe.</p>
+                            <div class="mt-auto">
+                                <h4 class="font-orbitron text-cyan-400 font-bold mb-2">System Admins</h4>
+                                <p class="text-sm">Faculty: <span class="text-white">Mrs Shilpa, Ms Bhavyashree, Ms
+                                        Malavika</span></p>
+                                <p class="text-sm">Student: <span class="text-white">Gauthami, Gulam, Aboobacker</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="lg:w-2/3 border-l-2 border-cyan-500/30 pl-0 lg:pl-8 mt-6 lg:mt-0">
+                            <h4 class="font-orbitron font-bold text-cyan-300 mb-4 uppercase text-sm">System Protocols
+                            </h4>
+                            <div
+                                class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-cyan-100/70 font-rajdhani font-semibold">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></div> Max 2 teams / class (2
+                                    students each)
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></div> Venue: Lab 1 (New Building)
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-1.5 h-1.5 bg-cyan-400 rounded-full"></div> 3 Operational Rounds (1h
+                                    30m)
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <div class="w-1.5 h-1.5 text-red-500 bg-red-500 rounded-full"></div> Zero tolerance
+                                    for malpractice
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card theme-spider rounded-xl shadow-2xl relative mt-16 md:mt-0" data-aos="fade-right">
+                    <img class="absolute marvel-sticker pointer-events-none z-30 h-[100px] md:h-[50%] lg:h-[60%]"
+                        src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExczU0bWNyNGY5c2k5b240Z2t0OXMzdmszMjB3cXMwZzFmYzhncmltZyZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/h2MouomJFCpMfWVfUj/giphy.gif"
+                        alt="Spider-Man Hanging" style="width: auto !important; top: -5px; right: 10px;">
+                    <div
+                        class="bg-gradient-to-br from-[#0A2463]/90 to-[#FF2A2A]/20 p-6 md:p-10 flex flex-col lg:flex-row gap-8 items-start relative z-10">
+                        <div class="lg:w-1/3 pt-4">
+                            <span
+                                class="inline-block px-3 py-1 bg-white text-black font-bangers text-sm rounded mb-4 -rotate-2 transform">Web
+                                Designing</span>
+                            <h3 class="font-bangers text-5xl md:text-6xl text-white tracking-widest text-shadow mb-2"
+                                style="text-shadow: 3px 3px 0 #FF2A2A, -1px -1px 0 #000;">Spider-Verse Design</h3>
+                            <p class="text-white text-lg mb-6 font-bold bg-black/40 inline-block px-2">Spin your digital
+                                webs.</p>
+                            <div
+                                class="mt-auto bg-white/10 p-4 rounded border-2 border-dashed border-white/30 backdrop-blur-sm transform rotate-1">
+                                <h4 class="font-bangers tracking-wider text-xl text-[#FF2A2A] mb-1">Webmasters</h4>
+                                <p class="text-sm font-bold">Faculty: Ms Veena, Ms Spoorthi</p>
+                                <p class="text-sm font-bold mt-1">Students: Albin, Basith</p>
+                            </div>
+                        </div>
+                        <div
+                            class="lg:w-2/3 bg-white text-black p-6 rounded-xl border-4 border-black border-r-8 border-b-8 font-bold transform -rotate-1 mt-6 lg:mt-0 relative z-10">
+                            <h4 class="font-bangers text-3xl text-blue-900 mb-4 border-b-4 border-black pb-2">Daily
+                                Bugle: RULES</h4>
+                            <ul
+                                class="space-y-2 text-md leading-relaxed font-sans font-extrabold uppercase relative z-10">
+                                <li class="border-b-2 border-gray-100 pb-1">⚡ Max 2 teams per class</li>
+                                <li class="border-b-2 border-gray-100 pb-1">⚡ 3 Action-packed rounds</li>
+                                <li class="border-b-2 border-gray-100 pb-1">📍 Venue: Old Building Lab 4</li>
+                                <li>⚖️ Judges’ decision is final.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card theme-battle rounded-xl p-1 md:p-2 battle-scratches" data-aos="zoom-in">
+                    <div
+                        class="bg-black/70 backdrop-blur-sm rounded-lg p-6 md:p-10 flex flex-col lg:flex-row gap-8 items-start relative z-10 border border-red-900/50">
+                        <div
+                            class="lg:w-1/3 text-center lg:text-left border-b lg:border-b-0 lg:border-r border-red-900/50 pb-6 lg:pb-0 lg:pr-8">
+                            <h3
+                                class="font-anton text-5xl md:text-6xl text-white mb-2 uppercase text-red-500 drop-shadow-[0_0_10px_rgba(226,54,54,0.6)]">
+                                BATTLEVERSE</h3>
+                            <p class="text-gray-300 text-xl mb-2 font-orbitron font-bold">Gaming Showdown</p>
+                            <p class="text-red-400 text-sm mb-3 font-orbitron font-bold uppercase tracking-widest">
+                                Venue: Room No104</p>
+                            <span
+                                class="inline-block px-4 py-1 bg-red-600 font-orbitron font-black text-sm text-black uppercase tracking-widest skew-x-[-10deg] mb-6">BGMI
+                                + E-Football</span>
+                            <div class="mt-4 bg-red-950/40 p-4 rounded border border-red-900/50 text-left">
+                                <h4 class="font-orbitron text-red-400 font-bold mb-2 text-sm uppercase">Commanders</h4>
+                                <p class="text-sm">Student: Chinmay, Nishad</p>
+                                <p class="text-sm mt-2">Faculty: Mr Pankaj, Mr Trilokanath, Mr Vaidesh</p>
+                            </div>
+                        </div>
+                        <div class="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <h4
+                                    class="font-orbitron font-black text-white text-xl mb-4 border-b-2 border-red-700 inline-block uppercase">
+                                    Deployment: BGMI</h4>
+                                <ul class="list-none text-sm text-gray-300 space-y-2 font-rajdhani font-semibold">
+                                    <li><strong class="text-white">Team:</strong> 4 players per team (strictly 1 team
+                                        per class)</li>
+                                    <li><strong class="text-white">Devices:</strong> Only mobile phones are allowed</li>
+                                    <li><strong class="text-white">Fair Play:</strong> No hacks or cheating; instant
+                                        disqualification</li>
+                                    <li><strong class="text-white">Matches:</strong> 3 matches based on schedule</li>
+                                    <li><strong class="text-white">Maps:</strong> Erangel, Rondo, Miramar (compulsory)
+                                    </li>
+                                    <li><strong class="text-white">Matchmaking:</strong> Join on time or wait for next
+                                        round</li>
+                                    <li><strong class="text-white">Points:</strong> Based on kills and team ranking</li>
+                                    <li><strong class="text-white">Registration:</strong> 65-75% attendance required
+                                    </li>
+                                    <li class="pt-2 border-t border-red-900/50 text-red-300"><strong
+                                            class="text-white leading-loose">Student Coordinators:</strong><br>Nishad -
+                                        9373791940<br>Chinmay Shetty - 6238380721</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4
+                                    class="font-orbitron font-black text-white text-xl mb-4 border-b-2 border-red-700 inline-block uppercase">
+                                    Pitch: E-Football</h4>
+                                <ul class="list-none text-sm text-gray-300 space-y-2 font-rajdhani font-semibold">
+                                    <li><strong class="text-white">Team:</strong> 2 players per team (2 teams per class
+                                        allowed)</li>
+                                    <li><strong class="text-white">Devices:</strong> Only mobile phones allowed</li>
+                                    <li><strong class="text-white">Fair Play:</strong> No cheating; organizer decision
+                                        final</li>
+                                    <li><strong class="text-white">Match Format:</strong> 1v1 or 2v2; 6-10 min halves
+                                    </li>
+                                    <li><strong class="text-white">Structure:</strong> Group + knockout format</li>
+                                    <li><strong class="text-white">Draw:</strong> Extra time & penalties</li>
+                                    <li><strong class="text-white">Disconnect:</strong> Restart or organizer decision
+                                    </li>
+                                    <li><strong class="text-white">Conduct:</strong> No quitting or time wasting</li>
+                                    <li><strong class="text-white">Registration:</strong> 65-75% attendance required
+                                    </li>
+                                    <li class="pt-2 border-t border-red-900/50 text-red-300"><strong
+                                            class="text-white leading-loose">Faculty Coordinator:</strong><br>Pankaj
+                                        Gatty - +91 74837 72863</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card theme-wakanda rounded-xl p-1 md:p-2 wakanda-pattern" data-aos="fade-up">
+                    <img class="absolute wakanda-overlay pointer-events-none" src="bp.jpeg" alt="Shuri Wakanda">
+                    <div
+                        class="bg-black/80 backdrop-blur-sm rounded-lg p-6 md:p-10 flex flex-col lg:flex-row gap-8 items-start relative z-10 border border-purple-500/20">
+                        <div class="lg:w-1/3">
+                            <span
+                                class="inline-block px-3 py-1 bg-purple-900/40 text-purple-300 font-orbitron text-xs font-bold rounded mb-4 ring-1 ring-purple-500/50 uppercase">Product
+                                Launch</span>
+                            <h3 class="font-marvel text-5xl md:text-6xl text-white mb-2 uppercase tracking-wide">
+                                Vibranium <br>Launch Pad</h3>
+                            <p class="text-purple-300 text-lg mb-6 font-rajdhani">Showcase tech that shapes the future.
+                            </p>
+                            <div class="mt-auto border-t border-purple-500/30 pt-4 relative z-10">
+                                <h4 class="font-orbitron text-purple-400 font-bold mb-2 uppercase text-sm">Coordinators
+                                </h4>
+                                <p class="text-sm">Student: Veekshith K P (7736814275), Nikitha Ojha (9366768616)</p>
+                                <p class="text-sm mt-2">Staff: Roopashree (9481984956), Soniya Joy (8793491307)</p>
+                            </div>
+                        </div>
+                        <div
+                            class="lg:w-2/3 bg-purple-950/20 p-6 rounded-lg border border-purple-800/30 mt-6 lg:mt-0 relative z-10">
+                            <h4
+                                class="font-orbitron font-bold text-gray-200 mb-4 uppercase text-lg border-b border-purple-500/30 pb-2">
+                                Rules</h4>
+                            <div class="space-y-4 relative z-10">
+                                <div class="flex items-start gap-3">
+                                    <div
+                                        class="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-purple-600 flex items-center justify-center font-bold text-xs">
+                                        1</div>
+                                    <p class="text-gray-300 font-rajdhani font-semibold text-lg">Each team must have two
+                                        members.</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div
+                                        class="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-purple-600 flex items-center justify-center font-bold text-xs">
+                                        2</div>
+                                    <p class="text-gray-300 font-rajdhani font-semibold text-lg">Formal dress code is
+                                        required.</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div
+                                        class="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-purple-600 flex items-center justify-center font-bold text-xs">
+                                        3</div>
+                                    <p class="text-gray-300 font-rajdhani font-semibold text-lg">Participants must bring
+                                        their own devices (laptop and internet).</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div
+                                        class="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-purple-600 flex items-center justify-center font-bold text-xs">
+                                        4</div>
+                                    <p class="text-gray-300 font-rajdhani font-semibold text-lg">A product demonstration
+                                        and presentation are required.</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div
+                                        class="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-red-600 flex items-center justify-center font-bold text-xs">
+                                        5</div>
+                                    <p class="text-gray-300 font-rajdhani font-semibold text-lg">Use of mobile phones
+                                        during explanation and presentation is prohibited; only laptops are allowed.</p>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <div
+                                        class="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-purple-600 flex items-center justify-center font-bold text-xs">
+                                        📍</div>
+                                    <p class="text-gray-300 font-rajdhani font-semibold text-lg">Venue: Room 105</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card rounded-xl p-1 md:p-2 mt-12"
+                    style="background: linear-gradient(135deg, #020617 0%, #0f172a 100%); border-top: 4px solid #3b82f6; box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);"
+                    data-aos="fade-up">
+                    <img class="absolute marvel-sticker pointer-events-none z-30" src="shield.png" alt="Shield Logo"
+                        style="width: 130px !important; height: auto !important; top: -30px; right: 10px;">
+                    <div
+                        class="bg-black/60 backdrop-blur-sm rounded-lg p-6 md:p-10 flex flex-col lg:flex-row gap-8 items-start relative z-10 border border-blue-500/20">
+                        <div class="lg:w-1/3">
+                            <span
+                                class="inline-block px-3 py-1 bg-blue-900/40 text-blue-300 font-orbitron text-xs font-bold rounded mb-4 ring-1 ring-blue-500/50 uppercase tracking-widest">IT
+                                Manager</span>
+                            <h3
+                                class="font-anton text-5xl md:text-6xl text-white mb-2 uppercase tracking-wider drop-shadow-[0_0_10px_rgba(59,130,246,0.6)]">
+                                Tech Sovereign</h3>
+                            <p class="text-blue-200 text-lg mb-6 font-rajdhani font-bold leading-tight">A Challenge of
+                                Skill, Strategy, and Decision-Making.</p>
+                            <div class="mt-auto border-t border-blue-500/30 pt-4">
+                                <h4 class="font-orbitron text-blue-400 font-bold mb-2 uppercase text-sm">S.H.I.E.L.D.
+                                    Directors (Contact)</h4>
+                                <div class="text-xs space-y-1 font-rajdhani text-gray-300 font-semibold tracking-wide">
+                                    <p>Student: <span class="text-white">Shaima, Naveen</span></p>
+                                    <p>Faculty: <span class="text-white">Mrs Geetha Rego, Ms Nishmitha, Mrs
+                                            Thejaswi</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="lg:w-2/3 bg-blue-950/10 p-6 rounded-lg border border-blue-800/30 mt-6 lg:mt-0 w-full relative z-10">
+                            <div
+                                class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-blue-500/30 pb-3 mb-5 gap-2">
+                                <h4 class="font-orbitron font-bold text-gray-200 uppercase text-xl">Mission Rules</h4>
+                                <div
+                                    class="text-left sm:text-right bg-blue-900/40 px-3 py-1 rounded border border-blue-500/30">
+                                    <span
+                                        class="block text-xs text-blue-300 font-orbitron font-bold tracking-widest">17-4-2026
+                                        | 10:00 AM</span>
+                                    <span
+                                        class="block text-xs text-blue-100 font-orbitron font-bold tracking-widest">Venue:
+                                        Room 103</span>
+                                </div>
+                            </div>
+                            <div
+                                class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6 text-sm text-gray-300 font-rajdhani font-semibold">
+                                <div class="flex items-start gap-2">
+                                    <div class="w-1.5 h-1.5 bg-blue-400 rounded-full mt-1.5 flex-shrink-0"></div>
+                                    <p>Multiple participants are allowed from the classes.</p>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <div class="w-1.5 h-1.5 bg-blue-400 rounded-full mt-1.5 flex-shrink-0"></div>
+                                    <p>Participants must wear formal attire.</p>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <div class="w-1.5 h-1.5 bg-blue-400 rounded-full mt-1.5 flex-shrink-0"></div>
+                                    <p>Rounds will be disclosed on the spot.</p>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <div class="w-1.5 h-1.5 bg-blue-400 rounded-full mt-1.5 flex-shrink-0"></div>
+                                    <p>No participant replacements are allowed after registration.</p>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <div class="w-1.5 h-1.5 bg-blue-400 rounded-full mt-1.5 flex-shrink-0"></div>
+                                    <p>Participants must carry their own laptop.</p>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <div class="w-1.5 h-1.5 bg-blue-400 rounded-full mt-1.5 flex-shrink-0"></div>
+                                    <p>Arguments with the judges will not be entertained.</p>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <div class="w-1.5 h-1.5 text-red-500 bg-red-500 rounded-full mt-1.5 flex-shrink-0">
+                                    </div>
+                                    <p>Use of unfair means, plagiarism, or external assistance is strictly prohibited.
+                                    </p>
+                                </div>
+                                <div class="flex items-start gap-2">
+                                    <div class="w-1.5 h-1.5 bg-blue-400 rounded-full mt-1.5 flex-shrink-0"></div>
+                                    <p>Participants must maintain professional behavior throughout the event.</p>
+                                </div>
+                                <div class="flex items-start gap-2 md:col-span-2">
+                                    <div class="w-1.5 h-1.5 text-red-500 bg-red-500 rounded-full mt-1.5 flex-shrink-0">
+                                    </div>
+                                    <p>Any form of misbehavior or misconduct will lead to immediate disqualification.
+                                    </p>
+                                </div>
+                            </div>
+                            <div
+                                class="bg-blue-900/30 p-3 rounded border-l-4 border-blue-500 flex flex-col sm:flex-row items-center justify-between gap-2">
+                                <span
+                                    class="font-orbitron text-sm font-bold text-white uppercase tracking-widest flex items-center gap-2">
+                                    <div class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div> Solo
+                                    Participation Only
+                                </span>
+                                <span
+                                    class="font-orbitron text-sm font-bold text-white uppercase tracking-widest flex items-center gap-2">
+                                    <div class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div> Open to all
+                                    students
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="event-card rounded-xl p-1 md:p-2 mt-12"
+                    style="background: linear-gradient(135deg, #052e16 0%, #000000 100%); border-top: 4px solid #10b981; box-shadow: 0 10px 30px rgba(16, 185, 129, 0.2);"
+                    data-aos="fade-up">
+                    <div
+                        class="bg-black/60 backdrop-blur-sm rounded-lg p-6 md:p-10 flex flex-col lg:flex-row gap-8 items-start relative z-10 border border-emerald-500/20">
+                        <div class="lg:w-1/3">
+                            <span
+                                class="inline-block px-3 py-1 bg-emerald-900/40 text-emerald-300 font-orbitron text-xs font-bold rounded mb-4 ring-1 ring-emerald-500/50 uppercase tracking-widest">Photography
+                                / Videography</span>
+                            <h3
+                                class="font-anton text-5xl md:text-6xl text-white mb-2 uppercase tracking-wider drop-shadow-[0_0_10px_rgba(16,185,129,0.6)]">
+                                CAPTURECODE
+                            </h3>
+                            <p class="text-emerald-200 text-lg mb-6 font-rajdhani font-bold leading-tight">LET THE FRAME
+                                SPEAK</p>
+                            <div class="mt-auto border-t border-emerald-500/30 pt-4">
+                                <h4 class="font-orbitron text-emerald-400 font-bold mb-2 uppercase text-sm">Supervisory
+                                    Directors</h4>
+                                <div class="text-xs space-y-1 font-rajdhani text-gray-300 font-semibold tracking-wide">
+                                    <p>Coordinators:</p>
+                                    <p class="text-white">Dr. Divya Naveen, Ms. Malavika</p>
+                                    <p class="mt-2 text-gray-300">Student Incharge:</p>
+                                    <p class="text-white">Shafil, Kaizar, Vandith</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="lg:w-2/3 bg-emerald-950/10 p-6 rounded-lg border border-emerald-800/30 mt-6 lg:mt-0 w-full relative z-10">
+                            <div
+                                class="flex flex-col sm:flex-row justify-between items-start sm:items-center border-b border-emerald-500/30 pb-3 mb-5 gap-2">
+                                <h4 class="font-orbitron font-bold text-gray-200 uppercase text-xl">Mission Briefing
+                                </h4>
+                                <div
+                                    class="text-left sm:text-right bg-emerald-900/40 px-3 py-1 rounded border border-emerald-500/30">
+                                    <span
+                                        class="block text-xs text-emerald-300 font-orbitron font-bold tracking-widest">17
+                                        Apr | 9:00 AM</span>
+                                    <span
+                                        class="block text-xs text-emerald-100 font-orbitron font-bold tracking-widest">Venue:
+                                        Old Building Lab 3</span>
+                                </div>
+                            </div>
+                            <div
+                                class="bg-black/50 p-4 rounded-lg border border-white/5 hover:border-emerald-500/50 transition mb-6">
+                                <h5 class="font-orbitron text-emerald-400 text-sm font-bold uppercase mb-1">Objective
+                                </h5>
+                                <p class="text-xs text-gray-300 font-rajdhani font-semibold leading-relaxed">Capture the
+                                    essence of the multiverse. Frame your shots, compose your angles, and let the visual
+                                    storytelling speak for itself. Only the most observant eyes will prevail.</p>
+                            </div>
+                            <div
+                                class="bg-emerald-900/30 p-3 rounded border-l-4 border-emerald-500 flex flex-col sm:flex-row items-center justify-between gap-2">
+                                <span
+                                    class="font-orbitron text-sm font-bold text-white uppercase tracking-widest flex items-center gap-2">
+                                    <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div> TECH FIESTA
+                                    PRESENTS
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="technova" class="py-24 relative z-10 bg-[#050505] overflow-hidden">
+        <img class="absolute opacity-60 pointer-events-none"
+            src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3enljcm83eWllZmF2ZTVneTBzNXVkc3Z2cTBseW45bHhlcXFjYTlnYSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/Wcx2ygJ6nExpyHNRWA/giphy.gif"
+            alt="Thor with microphone png" style="width: 25%; max-width: 300px; bottom:-20px; left:5%;">
+
+        <div class="max-w-7xl mx-auto px-4 md:px-8 relative z-20">
+            <div class="text-center mb-10" data-aos="fade-down">
+                <h2 class="font-anton text-5xl md:text-7xl uppercase tracking-wider phase-title">Phase 2: <span
+                        class="text-yellow-400">FUISION FIESTA </span></h2>
+                <p class="font-orbitron text-xl text-gray-400 mt-4 tracking-widest">"When Fashion meets tech"</p>
+            </div>
+
+            <div class="rules-box border-l-4 border-yellow-400" data-aos="fade-up">
+                <h3 class="font-orbitron font-bold text-xl text-yellow-400 mb-3 uppercase tracking-widest">Global
+                    Directives:Fusion Fiesta ⚠️</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 text-sm text-gray-300 font-rajdhani">
+                    <p>1. Team should report on time, before the third call.</p>
+                    <p>2. Green rooms will be allotted for each team with their respective incharges.</p>
+                    <p>3. Team must occupy the room only for the mentioned time and shall maintain cleanliness.</p>
+                    <p>4. Class discipline is the responsibility of the class representatives.</p>
+                </div>
+            </div>
+
+            <div class="event-card rounded-xl p-1 md:p-2 mb-12"
+                style="background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%); border-top: 4px solid #FFD700; box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);"
+                data-aos="fade-up">
+                <div
+                    class="bg-black/60 backdrop-blur-sm rounded-lg p-6 md:p-10 flex flex-col lg:flex-row gap-8 items-start relative z-10 border border-yellow-500/20">
+                    <div class="lg:w-1/3">
+                        <span
+                            class="inline-block px-3 py-1 bg-yellow-900/40 text-yellow-300 font-orbitron text-xs font-bold rounded mb-4 ring-1 ring-yellow-500/50 uppercase tracking-widest">Flagship
+                            Event</span>
+                        <h3
+                            class="font-anton text-5xl md:text-6xl text-white mb-2 uppercase tracking-wider drop-shadow-[0_0_10px_rgba(255,215,0,0.6)]">
+                            Fashion Technova</h3>
+                        <p class="text-yellow-200 text-lg mb-6 font-rajdhani font-bold leading-tight">Where fashion
+                            meets tech.</p>
+
+                        <div class="mt-auto">
+                            <h4 class="font-orbitron text-yellow-400 font-bold mb-2 uppercase text-sm">Event Incharges
+                            </h4>
+                            <p class="text-sm font-bold text-gray-300 mt-2">Faculty: <span class="text-white">Ms Priya,
+                                    Ms Yakshitha R Shetty</span></p>
+                            <p class="text-sm font-bold text-gray-300">Student: <span class="text-white">Ziyana</span>
+                            </p>
+                        </div>
+                        <div class="mt-4 bg-yellow-950/30 p-4 rounded border-l-4 border-yellow-500">
+                            <h4 class="font-orbitron text-yellow-400 font-bold mb-2 uppercase text-sm">Evaluation Matrix
+                            </h4>
+                            <ul
+                                class="list-disc list-inside text-sm text-gray-300 font-rajdhani font-semibold space-y-1">
+                                <li>Creativity & Theme Relevance</li>
+                                <li>Presentation & Confidence</li>
+                                <li>Team Coordination</li>
+                                <li>Overall Impact</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div
+                        class="lg:w-2/3 bg-yellow-950/10 p-6 rounded-lg border border-yellow-800/30 w-full relative z-10">
+                        <h4
+                            class="font-orbitron font-bold text-gray-200 uppercase text-xl border-b border-yellow-500/30 pb-3 mb-5">
+                            Runway Rules</h4>
+                        <div
+                            class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-300 font-rajdhani font-semibold">
+                            <div class="flex items-start gap-2">
+                                <div class="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-1.5"></div>
+                                <p>Team size must be 6 to 8 members.</p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <div class="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-1.5"></div>
+                                <p>Follow a Futuristic / Tech-Inspired theme. Outfits must reflect innovation.</p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <div class="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-1.5"></div>
+                                <p>Performance duration: 5+2 minutes.</p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <div class="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-1.5"></div>
+                                <p>Only safe and tech-related props are allowed.</p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <div class="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-1.5"></div>
+                                <p>Song choices must not contain vulgar or inappropriate content.</p>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <div class="w-1.5 h-1.5 text-red-500 bg-red-500 rounded-full mt-1.5"></div>
+                                <p>Misconduct leads to disqualification. Judges' decision is final.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="event-card rounded-xl p-1 md:p-2 mb-12 mt-8"
+                style="background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%); border-top: 4px solid #FFD700; box-shadow: 0 5px 20px rgba(255, 215, 0, 0.1);"
+                data-aos="fade-up" data-aos-delay="200">
+                <div
+                    class="bg-black/60 backdrop-blur-sm rounded-lg p-6 md:p-10 relative z-10 border border-yellow-500/20">
+                    <div class="text-center mb-8 border-b border-yellow-500/30 pb-6">
+                        <span
+                            class="inline-block px-3 py-1 bg-yellow-900/40 text-yellow-300 font-orbitron text-xs font-bold rounded mb-4 ring-1 ring-yellow-500/50 uppercase tracking-widest">Variety
+                            Event</span>
+                        <h3
+                            class="font-anton text-4xl md:text-5xl text-white mb-2 uppercase tracking-wider drop-shadow-[0_0_10px_rgba(255,215,0,0.6)]">
+                            Celestra</h3>
+                        <p class="text-yellow-200 text-base font-rajdhani font-bold leading-tight mb-1">United beyond boundaries</p>
+                        <p class="text-yellow-200 text-lg font-rajdhani font-bold leading-tight mb-2">Time Allotted:
+                            10+5 Minutes</p>
+                        <div class="text-sm font-bold text-gray-300">
+                            <p>Faculty Incharges: <span class="text-white">Ms. Roopashree | Mrs. Thejaswi</span></p>
+                            <p>Student Incharge: <span class="text-white">Krithika</span></p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col lg:flex-row gap-8">
+                        <div
+                            class="lg:w-1/2 bg-black/40 p-6 rounded-xl border border-white/5 hover:border-yellow-500/50 transition duration-300">
+                            <h4
+                                class="font-orbitron font-bold text-yellow-400 uppercase text-lg mb-4 border-b border-yellow-500/30 pb-2">
+                                Rules ‼️</h4>
+                            <ul class="list-none text-sm text-gray-300 space-y-3 font-rajdhani font-semibold">
+                                <li class="flex items-start gap-2">
+                                    <div class="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-1.5 flex-shrink-0"></div>
+                                    <p>Each team will be allotted 10+5 minutes. Delay may lead to disqualification.</p>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <div class="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-1.5 flex-shrink-0"></div>
+                                    <p>Team must be punctual on time and dressed appropriately.</p>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <div class="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-1.5 flex-shrink-0"></div>
+                                    <p>Team members must maintain discipline and adhere to all rules.</p>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <div class="w-1.5 h-1.5 text-red-500 bg-red-500 rounded-full mt-1.5 flex-shrink-0">
+                                    </div>
+                                    <p>Use of abusive language/behaviour will not be entertained.</p>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <div class="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-1.5 flex-shrink-0"></div>
+                                    <p>Follow all instructions given by the coordinators/judges. Their decisions are
+                                        final.</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div
+                            class="lg:w-1/2 bg-black/40 p-6 rounded-xl border border-white/5 hover:border-yellow-500/50 transition duration-300">
+                            <h4
+                                class="font-orbitron font-bold text-yellow-400 uppercase text-lg mb-4 border-b border-yellow-500/30 pb-2">
+                                Judging Criteria</h4>
+                            <ul class="list-none text-sm text-gray-300 space-y-3 font-rajdhani font-semibold">
+                                <li class="flex items-start gap-2">
+                                    <div class="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-1.5 flex-shrink-0"></div>
+                                    <p>Emcee</p>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <div class="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-1.5 flex-shrink-0"></div>
+                                    <p>Creativity</p>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <div class="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-1.5 flex-shrink-0"></div>
+                                    <p>Theme Relevance</p>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <div class="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-1.5 flex-shrink-0"></div>
+                                    <p>Team Coordination</p>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <div class="w-1.5 h-1.5 bg-yellow-400 rounded-full mt-1.5 flex-shrink-0"></div>
+                                    <p>Time Management</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+                        <div
+                            class="text-center bg-black/40 p-6 rounded-xl border border-white/5 hover:border-yellow-500/50 transition duration-300">
+                            <div
+                                class="w-16 h-16 mx-auto bg-yellow-500/20 rounded-full flex items-center justify-center mb-4 border border-yellow-500/50">
+                                <span class="text-3xl">💃</span>
+                            </div>
+                            <h4 class="font-anton text-2xl text-white mb-2 tracking-wider">Dynamic Dance</h4>
+                            <p class="text-sm text-gray-400 font-rajdhani">Synchronize your movements with the rhythm.
+                            </p>
+                        </div>
+                        <div
+                            class="text-center bg-black/40 p-6 rounded-xl border border-white/5 hover:border-yellow-500/50 transition duration-300">
+                            <div
+                                class="w-16 h-16 mx-auto bg-yellow-500/20 rounded-full flex items-center justify-center mb-4 border border-yellow-500/50">
+                                <span class="text-3xl">🎭</span>
+                            </div>
+                            <h4 class="font-anton text-2xl text-white mb-2 tracking-wider">Theatrical Drama</h4>
+                            <p class="text-sm text-gray-400 font-rajdhani">Act out your alternate realities & stories.
+                            </p>
+                        </div>
+                        <div
+                            class="text-center bg-black/40 p-6 rounded-xl border border-white/5 hover:border-yellow-500/50 transition duration-300">
+                            <div
+                                class="w-16 h-16 mx-auto bg-yellow-500/20 rounded-full flex items-center justify-center mb-4 border border-yellow-500/50">
+                                <span class="text-3xl">🎤</span>
+                            </div>
+                            <h4 class="font-anton text-2xl text-white mb-2 tracking-wider">Sonic Singing</h4>
+                            <p class="text-sm text-gray-400 font-rajdhani">Let your voice resonate across the timelines.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+    <div id="regModal"
+        class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-black/90 backdrop-blur-sm p-4 overflow-y-auto pt-20 pb-10">
+        <div
+            class="bg-[#0a0a0a] border-t-4 border-b-4 border-red-600 w-full max-w-lg p-6 md:p-8 relative shadow-[0_0_30px_rgba(226,54,54,0.3)] my-auto">
+            <button onclick="toggleModal(false)"
+                class="absolute top-4 right-4 text-gray-500 hover:text-red-500 transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </button>
+
+            <h2 class="text-3xl font-anton text-white tracking-widest uppercase mb-1">Assemble <span
+                    class="text-red-600">Now</span></h2>
+            <p class="text-xs text-red-500 font-orbitron mb-6 uppercase tracking-widest font-bold">Access Protocol:
+                Multi-Mission Deployment Authorized</p>
+
+            <form id="regForm" class="space-y-4">
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-orbitron text-gray-400 mb-1 tracking-widest">HERO IDENTITY
+                            (NAME)</label>
+                        <input id="form-name" type="text" required class="w-full p-3 rounded-sm input-marvel text-base">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-orbitron text-gray-400 mb-1 tracking-widest">S.H.I.E.L.D. ID
+                            (REG NO)</label>
+                        <input id="form-regNo" type="text" required placeholder="e.g. 23S123"
+                            class="w-full p-3 rounded-sm input-marvel text-base font-orbitron uppercase">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-orbitron text-gray-400 mb-1 tracking-widest">TRAINING
+                            YEAR</label>
+                        <select id="form-year" class="w-full p-3 rounded-sm input-marvel text-base font-bold">
+                            <option value="1st Year">1st Year</option>
+                            <option value="2nd Year">2nd Year</option>
+                            <option value="3rd Year">3rd Year</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-orbitron text-gray-400 mb-1 tracking-widest">FACTION
+                            (DEPT)</label>
+                        <select id="form-dept" class="w-full p-3 rounded-sm input-marvel text-base font-bold">
+                            <option value="BCA">BCA</option>
+
+                        </select>
+                    </div>
+                </div>
+
+                <div id="teammate-container"
+                    class="border border-white/10 p-3 bg-white/5 rounded-sm transition-all duration-300">
+                    <label class="flex items-center space-x-3 cursor-pointer">
+                        <input type="checkbox" id="has-teammate" class="form-checkbox h-4 w-4"
+                            onchange="document.getElementById('teammate-fields').classList.toggle('hidden', !this.checked)">
+                        <span class="text-xs font-orbitron text-gray-400 tracking-widest uppercase mb-0">Add
+                            Teammate</span>
+                    </label>
+                    <div id="teammate-fields" class="hidden grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                        <div>
+                            <label class="block text-xs font-orbitron text-gray-400 mb-1 tracking-widest">TEAMMATE
+                                NAME</label>
+                            <input id="form-teammate-name" type="text" placeholder="e.g. Tony Stark"
+                                class="w-full p-3 rounded-sm input-marvel text-base">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-orbitron text-gray-400 mb-1 tracking-widest">TEAMMATE
+                                ID</label>
+                            <input id="form-teammate" type="text" placeholder="e.g. 23S124"
+                                class="w-full p-3 rounded-sm input-marvel text-base font-orbitron uppercase">
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-orbitron text-gray-400 mb-2 tracking-widest">SELECT MISSIONS (CHECK
+                        ALL THAT APPLY)</label>
+
+                    <div
+                        class="bg-black/50 border border-white/10 p-4 rounded-sm max-h-48 overflow-y-auto custom-scroll space-y-4">
+
+                        <div>
+                            <h4
+                                class="text-xs font-bangers text-red-500 tracking-wider mb-2 border-b border-white/10 pb-1">
+                                PHASE 1: CELESTRA</h4>
+                            <div class="space-y-2">
+                                <label class="flex items-center space-x-3 cursor-pointer">
+                                    <input type="checkbox" name="eventCheck" value="The Hidden Multiverse"
+                                        class="form-checkbox h-4 w-4">
+                                    <span class="text-sm font-rajdhani font-semibold text-gray-300">The Hidden
+                                        Multiverse(Surprise Event) (10:00 AM - 1:00 PM)</span>
+                                </label>
+                                <label class="flex items-center space-x-3 cursor-pointer">
+                                    <input type="checkbox" name="eventCheck" value="Jarvis Query Core"
+                                        class="form-checkbox h-4 w-4">
+                                    <span class="text-sm font-rajdhani font-semibold text-gray-300">Jarvis Query Core
+                                        (Escape Room) (10:00 AM - 11:30 AM)</span>
+                                </label>
+                                <label class="flex items-center space-x-3 cursor-pointer">
+                                    <input type="checkbox" name="eventCheck" value="Spider-Verse Design"
+                                        class="form-checkbox h-4 w-4">
+                                    <span class="text-sm font-rajdhani font-semibold text-gray-300">Spider-Verse Design
+                                        (Web Designing) (11:30 AM - 1:30 PM)</span>
+                                </label>
+                                <label class="flex items-center space-x-3 cursor-pointer">
+                                    <input type="checkbox" name="eventCheck" value="Battleverse"
+                                        class="form-checkbox h-4 w-4">
+                                    <span class="text-sm font-rajdhani font-semibold text-gray-300">Battleverse
+                                        (Gaming) (10:00 AM - 1:00 PM)</span>
+                                </label>
+                                <label class="flex items-center space-x-3 cursor-pointer">
+                                    <input type="checkbox" name="eventCheck" value="Vibranium Launch Pad"
+                                        class="form-checkbox h-4 w-4">
+                                    <span class="text-sm font-rajdhani font-semibold text-gray-300">Vibranium Launch Pad
+                                        (Product Launch) (11:00 AM - 1:30 PM)</span>
+                                </label>
+                                <label class="flex items-center space-x-3 cursor-pointer">
+                                    <input type="checkbox" name="eventCheck" value="Tech Sovereign"
+                                        class="form-checkbox h-4 w-4">
+                                    <span class="text-sm font-rajdhani font-semibold text-gray-300">Tech Sovereign (IT
+                                        Manager) (10:00 AM - 4:00 PM)</span>
+                                </label>
+                                <label class="flex items-center space-x-3 cursor-pointer">
+                                    <input type="checkbox" name="eventCheck" value="CAPTURECODE"
+                                        class="form-checkbox h-4 w-4">
+                                    <span class="text-sm font-rajdhani font-semibold text-gray-300">CAPTURECODE
+                                        (Photography/Videography) (9:00 AM)</span>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="clashWarning"
+                    class="hidden text-red-500 font-rajdhani text-sm font-bold tracking-wider bg-red-900/20 p-3 rounded border border-red-500/50 mt-2">
+                </div>
+
+                <button type="submit" id="subBtn"
+                    class="w-full btn-glitch py-4 text-lg mt-6 shadow-[0_0_15px_rgba(226,54,54,0.5)]">
+                    Confirm Deployment
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="bg-black py-10 border-t border-red-900/30 relative z-10 text-center mt-10">
+        <div class="marvel-title-box text-2xl mb-6 opacity-50 hover:opacity-100 transition-opacity cursor-pointer">
+            <span class="marvel-tech">TECH</span>
+            <span class="marvel-fiesta">FIESTA</span>
+        </div>
+        <p class="font-orbitron text-gray-500 text-sm tracking-widest uppercase">Shree Devi College of Information
+            Science</p>
+        <p class="font-rajdhani text-gray-600 text-xs mt-2">© 2026 TechFiesta. All Multiversal Rights Reserved.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, offset: 50, duration: 800 });
+
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+            document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : 'auto';
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('marvel-loader');
+                if (loader) {
+                    loader.style.opacity = '0';
+                    setTimeout(() => loader.style.display = 'none', 500);
+                }
+            }, 1500);
+        });
+
+        function toggleModal(show) {
+            const modal = document.getElementById('regModal');
+            const loader = document.getElementById('marvel-loader');
+            const loaderMsg = document.getElementById('loader-msg');
+
+            if (show) {
+                if (loader) {
+                    loaderMsg.innerText = "ACCESSING S.H.I.E.L.D. MAINFRAME...";
+                    loader.style.display = 'flex';
+                    // force reflow
+                    void loader.offsetWidth;
+                    loader.style.opacity = '1';
+
+                    setTimeout(() => {
+                        loader.style.opacity = '0';
+                        setTimeout(() => {
+                            loader.style.display = 'none';
+                            modal.classList.remove('hidden');
+                            document.body.style.overflow = 'hidden';
+                        }, 500);
+                    }, 1500);
+                } else {
+                    modal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                }
+            } else {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyfLclDur_fftk-6uNBtScP-Cd9hqSYFLFg8JUfSqvPNtFtq1-ZJ8xeHEAe7H_49fdr3w/exec';
+
+        const EVENT_TIMES = {
+            "The Hidden Multiverse": { start: 10.0, end: 13.0 },
+            "Jarvis Query Core": { start: 10.0, end: 11.5 },
+            "Spider-Verse Design": { start: 11.5, end: 13.5 },
+            "Battleverse": { start: 10.0, end: 13.0 },
+            "Vibranium Launch Pad": { start: 11.0, end: 13.5 },
+            "Tech Sovereign": { start: 10.0, end: 16.0 },
+            "CAPTURECODE": { start: 9.0, end: 13.0 }
+        };
+
+        function checkClashes() {
+            const checkboxes = document.querySelectorAll('input[name="eventCheck"]:checked');
+            let selected = Array.from(checkboxes).map(cb => cb.value);
+            let clashes = [];
+
+            for (let i = 0; i < selected.length; i++) {
+                for (let j = i + 1; j < selected.length; j++) {
+                    const e1 = EVENT_TIMES[selected[i]];
+                    const e2 = EVENT_TIMES[selected[j]];
+                    if (e1 && e2) {
+                        if (selected[i] !== "CAPTURECODE" && selected[j] !== "CAPTURECODE") {
+                            if (e1.start < e2.end && e1.end > e2.start) {
+                                clashes.push(`• ${selected[i]} & ${selected[j]}`);
+                            }
+                        }
+                    }
+                }
+            }
+
+            const warningDiv = document.getElementById('clashWarning');
+            const subBtn = document.getElementById('subBtn');
+            if (clashes.length > 0) {
+                warningDiv.innerHTML = `⚠️ TIME CLASH DETECTED:<br>${clashes.join('<br>')}`;
+                warningDiv.classList.remove('hidden');
+                subBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                warningDiv.classList.add('hidden');
+                subBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+            return clashes.length > 0;
+        }
+
+        function toggleTeammateOption() {
+            const selectedEvents = Array.from(document.querySelectorAll('input[name="eventCheck"]:checked')).map(cb => cb.value);
+            const isSoloEventSelected = selectedEvents.includes("Tech Sovereign") || selectedEvents.includes("CAPTURECODE");
+            const teammateContainer = document.getElementById('teammate-container');
+            const hasTeammateCheckbox = document.getElementById('has-teammate');
+
+            if (isSoloEventSelected) {
+                teammateContainer.classList.add('hidden');
+                hasTeammateCheckbox.checked = false;
+                document.getElementById('teammate-fields').classList.add('hidden');
+                document.getElementById('form-teammate-name').value = '';
+                document.getElementById('form-teammate').value = '';
+            } else {
+                teammateContainer.classList.remove('hidden');
+            }
+        }
+
+        document.querySelectorAll('input[name="eventCheck"]').forEach(cb => {
+            cb.addEventListener('change', () => {
+                checkClashes();
+                toggleTeammateOption();
+            });
+        });
+
+        document.getElementById('regForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('subBtn');
+            const regNo = document.getElementById('form-regNo').value.trim().toUpperCase();
+
+            // Local duplicate tracking disabled temporarily for testing
+
+            // GATHER CHECKED EVENTS
+            const checkboxes = document.querySelectorAll('input[name="eventCheck"]:checked');
+            if (checkboxes.length === 0) {
+                alert("ERROR: You must select at least one mission to deploy.");
+                return;
+            }
+
+            if (checkClashes()) {
+                alert("Please resolve time clashes before confirming deployment.");
+                return;
+            }
+
+            let selectedEvents = Array.from(checkboxes).map(cb => cb.value);
+
+            // Combine selected events into a single string for Google Sheets
+            const finalEventString = selectedEvents.join(", ");
+
+            btn.disabled = true;
+            btn.innerHTML = 'Connecting to S.H.I.E.L.D...';
+
+            let name = document.getElementById('form-name').value;
+            const hasTeammate = document.getElementById('has-teammate').checked;
+
+            // Append Teammate info to the Name field so it saves to the Google Sheet without altering columns
+            if (hasTeammate) {
+                const teammateName = document.getElementById('form-teammate-name').value.trim();
+                const teammateId = document.getElementById('form-teammate').value.trim().toUpperCase();
+                let tmInfo = [teammateName, teammateId].filter(Boolean).join(" - ");
+                if (tmInfo !== "") {
+                    name = name + " (Team: " + tmInfo + ")";
+                }
+            }
+
+            const year = document.getElementById('form-year').value;
+            const dept = document.getElementById('form-dept').value;
+
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('regNo', regNo);
+            formData.append('year', year);
+            formData.append('dept', dept);
+            formData.append('event', finalEventString);
+
+            try {
+                await fetch(scriptURL, {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'no-cors'
+                });
+
+                alert("DEPLOYMENT SUCCESSFUL! You are registered for: " + finalEventString);
+                toggleModal(false);
+                e.target.reset();
+                toggleTeammateOption();
+            } catch (err) {
+                console.error('Error!', err.message);
+                alert("Deployment failed. Please check your connection and try again.");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Confirm Deployment";
+            }
+        };
+    </script>
+</body>
+
+</html>
